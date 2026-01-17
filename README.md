@@ -1,59 +1,85 @@
-# FinancieroApp
+# Banco Financiero - Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.9.
+Aplicación web desarrollada en Angular para la gestión de productos financieros. Este proyecto sigue los principios de **Clean Architecture** y **SOLID**, utilizando las últimas características del framework.
 
-## Development server
+## 🚀 Características Técnicas
 
-To start a local development server, run:
+*   **Framework**: Angular 20+.
+*   **Arquitectura**: Clean Architecture (Separación de capas: features, core, shared).
+*   **Gestión de Estado**: Angular Signals (Nativo).
+*   **Componentes**: Standalone Components.
+*   **Control Flow**: Nueva sintaxis (`@if`, `@for`, `@defer`).
+*   **Estilos**: SCSS Puro (Sin librerías de UI como Bootstrap o Tailwind). Diseño Responsive y Pixel Perfect.
+*   **Testing**: Jest (Unit Testing).
+*   **HTTP**: `provideHttpClient` con Interceptors funcionales y manejo de errores centralizado.
+*   **Seguridad**: Proxy reverso configurado para evitar problemas de CORS en desarrollo.
 
-```bash
-ng serve
-```
+## 📋 Requisitos Previos
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Asegúrate de tener instalado:
+*   [Node.js](https://nodejs.org/) (Versión LTS recomendada, v18+).
+*   [Angular CLI](https://angular.io/cli): `npm install -g @angular/cli`.
 
-## Code scaffolding
+## 🛠️ Instalación y Configuración
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+1.  **Clonar el repositorio:**
+    ```bash
+    git clone <url-del-repositorio>
+    cd financiero-app
+    ```
 
-```bash
-ng generate component component-name
-```
+2.  **Instalar dependencias:**
+    ```bash
+    npm install
+    ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## ▶️ Ejecución
 
-```bash
-ng generate --help
-```
+### 1. Backend (Requerido)
+Para que la aplicación funcione correctamente, el servicio backend debe estar ejecutándose en el puerto `3002`.
 
-## Building
+*   Base URL esperada: `http://localhost:3002/bp/products`
 
-To build the project run:
+### 2. Frontend (Desarrollo)
+La aplicación utiliza un proxy interno (`proxy.conf.json`) para redirigir las peticiones `/bp` al backend y evitar errores de CORS.
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+Ejecuta el siguiente comando para iniciar el servidor de desarrollo:
 
 ```bash
-ng e2e
+npm start
+```
+*   Abre tu navegador en `http://localhost:4200`.
+
+## ✅ Testing
+
+El proyecto utiliza **Jest** para las pruebas unitarias. Se ha cubierto la lógica de los servicios y componentes principales.
+
+Para ejecutar los tests:
+
+```bash
+npm test
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Para generar un reporte de cobertura:
 
-## Additional Resources
+```bash
+npm test -- --coverage
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 📂 Estructura del Proyecto
+
+```text
+src/app/
+├── core/               # Interceptores, Guards, Servicios Globales
+├── features/           # Módulos funcionales (DDD)
+│   └── products/
+│       ├── components/ # Componentes tontos (Presentational)
+│       ├── models/     # Interfaces y Tipos
+│       ├── pages/      # Componentes inteligentes (Smart/Pages)
+│       └── services/   # Lógica de negocio y comunicación HTTP
+├── app.config.ts       # Configuración global (Proveedores)
+└── app.routes.ts       # Definición de rutas
+```
+
+---
+Desarrollado con ❤️ para la Prueba Técnica.

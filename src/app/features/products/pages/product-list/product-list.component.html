@@ -1,0 +1,88 @@
+<div class="product-page" (click)="closeMenu()">
+  <div class="header">
+    <div class="search-box">
+      <input 
+        type="text" 
+        placeholder="Buscar..." 
+        [ngModel]="searchTerm()" 
+        (ngModelChange)="onSearch($event)"
+      >
+    </div>
+    <button class="btn-primary" routerLink="/add">Agregar</button>
+  </div>
+
+  <div class="content-card">
+    @if (loading()) {
+      <div class="skeleton-loader">
+        <div class="skeleton-header"></div>
+        @for (i of [1,2,3,4,5]; track i) {
+          <div class="skeleton-row"></div>
+        }
+      </div>
+    } @else {
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Logo</th>
+              <th>Nombre del producto</th>
+              <th>Descripción <span class="info-icon" data-tooltip="Descripción detallada del producto">i</span></th>
+              <th>Fecha de liberación <span class="info-icon" data-tooltip="Fecha en que el producto estará disponible">i</span></th>
+              <th>Fecha de reestructuración <span class="info-icon" data-tooltip="Fecha en que se revisará el producto">i</span></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (product of filteredProducts(); track product.id) {
+              <tr>
+                <td>
+                  <img [src]="product.logo" alt="Logo" class="product-logo" onerror="this.src='https://ui-avatars.com/api/?name=NO&background=random'">
+                </td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.date_release | date:'dd/MM/yyyy' }}</td>
+                <td>{{ product.date_revision | date:'dd/MM/yyyy' }}</td>
+                <td class="action-cell">
+                  <div class="menu-container">
+                    <button class="kebab-menu" (click)="toggleMenu(product.id, $event)">
+                      <span class="dots">⋮</span>
+                    </button>
+                    @if (activeMenuId() === product.id) {
+                      <div class="dropdown-content">
+                        <button (click)="editProduct(product)">Editar</button>
+                        <button (click)="confirmDelete(product)" class="delete-opt">Eliminar</button>
+                      </div>
+                    }
+                  </div>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="6" class="text-center">No se encontraron productos</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="footer-controls">
+        <span class="results-count">{{ filteredProducts().length }} Resultados</span>
+        <div class="page-size-selector">
+          <select [ngModel]="itemsPerPage()" (change)="onLimitChange($event)">
+            <option [value]="5">5</option>
+            <option [value]="10">10</option>
+            <option [value]="20">20</option>
+          </select>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+@if (showDeleteModal()) {
+  <app-delete-modal 
+    [productName]="productToDelete()?.name" 
+    (confirm)="onDeleteConfirmed()" 
+    (cancel)="closeDeleteModal()">
+  </app-delete-modal>
+}

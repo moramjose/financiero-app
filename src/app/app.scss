@@ -1,0 +1,41 @@
+.main-header {
+  background-color: var(--white);
+  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center; /* Centered Logo */
+    align-items: center;
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--secondary-color);
+    }
+    
+    .logo-icon {
+      /* font-size not needed for css shape */
+      display: flex;
+      align-items: center;
+      margin-right: 8px; 
+      font-size: 1.8rem; /* Control icon size */
+    }
+    
+    .logo-text {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--secondary-color);
+      text-transform: uppercase;
+    }
+  }
+}
+
+.main-content {
+  min-height: calc(100vh - 80px);
+}

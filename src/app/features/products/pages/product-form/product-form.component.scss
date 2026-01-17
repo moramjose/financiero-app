@@ -1,0 +1,142 @@
+.form-page {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 80vh;
+  
+  .card {
+    background: var(--white);
+    max-width: 800px;
+    width: 100%;
+    /* Removed large shadow */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
+    border-radius: 4px;
+
+    .card-header {
+      padding: 1.5rem 2rem;
+      text-align: center;
+      border-bottom: 2px solid var(--gray-200); /* Thicker line as per image */
+      position: relative; /* For absolute positioning of back button */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      h2 { 
+        margin: 0; 
+        font-size: 1.8rem; 
+        font-weight: 700;
+        color: var(--text-color);
+      }
+
+      .btn-back {
+        position: absolute;
+        left: 2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--secondary-color);
+        padding: 0.5rem;
+        width: auto; /* Override common button width */
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s;
+
+        &:hover {
+          background-color: var(--gray-100);
+          transform: translateY(-50%) translateX(-2px); /* Slight left nudge */
+        }
+      }
+    }
+    
+    .card-body {
+      padding: 2rem 3rem;
+      
+      @media (max-width: 600px) {
+        padding: 1.5rem;
+      }
+    }
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+    row-gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    
+    label {
+      font-weight: 700; /* Bolder labels */
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      color: var(--text-color);
+    }
+    
+    input {
+      padding: 12px; /* Taller input */
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-size: 1rem;
+      transition: border-color 0.15s;
+      
+      &:focus {
+        border-color: var(--secondary-color);
+        outline: none;
+      }
+
+      &.error-border {
+        border-color: var(--error-color);
+        /* Input bg stays white usually, maybe slight tint if wanted, but strict white matches image */
+        background-color: var(--white); 
+      }
+      
+      &:disabled {
+        background-color: var(--gray-100);
+        cursor: not-allowed;
+        color: #777;
+      }
+    }
+    
+    .error-msg {
+      color: var(--error-color);
+      font-size: 0.8rem;
+      margin-top: 0.4rem;
+      font-weight: 500;
+    }
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    
+    button {
+      /* inherit common styles */
+      width: 150px;
+      
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      
+      &:hover:not(:disabled) {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
